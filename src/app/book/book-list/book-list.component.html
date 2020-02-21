@@ -1,16 +1,17 @@
 <div class="row">
-  <div class="col-xs-12 form-group">
+  <div class="col-xs-12">
     <label for="search">Search for Book</label>
     <input type="text" name="search" id="search" class="form-control">
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
     <button class="btn btn-success">Search</button>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <p>book-item</p>
+    <app-book-item
+      *ngFor="let book of books; let i = index"
+      [book]="book"
+      [index]="i"
+    >
+    </app-book-item>
   </div>
 </div>
