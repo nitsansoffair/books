@@ -7,6 +7,7 @@ import { BookComponent } from './book/book.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BookItemComponent } from './book/book-list/book-item/book-item.component';
+import { BookDetailComponent } from './book/book-list/book-detail/book-detail.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { BookItemComponent } from './book/book-list/book-item/book-item.componen
     HeaderComponent,
     BookComponent,
     BookListComponent,
-    BookItemComponent
+    BookItemComponent,
+    BookDetailComponent
   ],
   imports: [
     BrowserModule,
