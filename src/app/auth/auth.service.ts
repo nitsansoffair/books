@@ -31,8 +31,6 @@ export class AuthService {
   }
 
   logout() {
-    console.log('logout');
-
     this.user.next(null);
     this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
@@ -66,11 +64,9 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
-    console.log(expirationDuration);
-
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
-    }, expirationDuration * 1000);
+    }, expirationDuration);
   }
 
   authenticate(email: string, password: string, urlReq: string) {
