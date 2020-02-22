@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { TransformedBook } from '../../book.model';
 import { BookService } from '../../book.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-book-detail',
@@ -12,6 +13,7 @@ import { BookService } from '../../book.service';
 export class BookDetailComponent implements OnInit {
   book: TransformedBook;
   id: number;
+  subscription: Subscription;
 
   constructor(private route: ActivatedRoute, private bookService: BookService) { }
 
@@ -19,12 +21,16 @@ export class BookDetailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = +params.id;
 
-      if (this.route.snapshot.parent.url[0].path === 'favorites') {
-        this.book = this.bookService.getFavorite(this.id);
-      } else {
-        this.book = this.bookService.getBook(this.id);
-      }
+      this.updateBook();
     });
+  }
+
+  updateBook() {
+    if (this.route.snapshot.parent.url[0].path === 'favorites') {
+      this.book = this.bookService.getFavorite(this.id);
+    } else {
+      this.book = this.bookService.getBook(this.id);
+    }
   }
 
 }

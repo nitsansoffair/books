@@ -16,7 +16,7 @@ export class BookListComponent implements OnInit {
   subscription: Subscription;
   searchForm: FormGroup;
 
-  constructor(private bookService: BookService, private dataStorageService: DataStorageService) { }
+  constructor(public bookService: BookService, private dataStorageService: DataStorageService) { }
 
   ngOnInit(): void {
     this.subscription = this.bookService.booksChanged.subscribe((books: TransformedBook[]) => {
@@ -24,7 +24,7 @@ export class BookListComponent implements OnInit {
       this.initForm();
     });
 
-    this.books = this.bookService.getBooks();
+    this.books = this.bookService.getBooksForPage();
     this.initForm();
   }
 
