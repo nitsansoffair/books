@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,6 +13,7 @@ import { BookDetailComponent } from './book/book-list/book-detail/book-detail.co
 import { BookService } from './book/book.service';
 import { AuthComponent } from './auth/auth.component';
 import { BookStartComponent } from './book/book-start/book-start.component';
+import {AuthInterceptorService} from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { BookStartComponent } from './book/book-start/book-start.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [BookService],
+  providers: [BookService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
