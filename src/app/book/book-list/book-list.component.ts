@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { TransformedBook } from '../book.model';
 import { BookService } from '../book.service';
-import {DataStorageService} from '../../shared/data-storage.service';
+import { DataStorageService } from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-book-list',
