@@ -37,6 +37,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.dataStorageService.fetchFavorites().subscribe();
   }
 
+  toggleCollapse() {
+    document.getElementById('collapse').classList.toggle('collapse');
+  }
+
   ngOnDestroy(): void {
     this.userSub.unsubscribe();
   }

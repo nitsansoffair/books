@@ -1,9 +1,9 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" style="cursor: pointer;">Books</a>
+      <a class="navbar-brand" style="cursor: pointer;" (click)="toggleCollapse()">Books</a>
     </div>
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="collapse">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active"><a routerLink="/books" *ngIf="isAuthenticated">Search</a></li>
         <li routerLinkActive="active"><a routerLink="/favorites" *ngIf="isAuthenticated">Favorites</a></li>
