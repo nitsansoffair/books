@@ -1,1 +1,22 @@
-<p>favorites works!</p>
+<div class="row">
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>Favorites</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12" *ngIf="books.length">
+        <app-book-item
+          *ngFor="let book of books; let i = index"
+          [book]="book"
+          [index]="i"
+        >
+        </app-book-item>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <router-outlet></router-outlet>
+  </div>
+</div>

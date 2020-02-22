@@ -15,7 +15,10 @@ const appRoutes: Routes = [
       { path: ':id', component: BookDetailComponent }
     ] },
   { path: 'auth', component: AuthComponent },
-  { path: 'favorites', component: FavoritesComponent }
+  { path: 'favorites', component: FavoritesComponent, canActivate: [AuthGuard], children: [
+      { path: '', component: BookStartComponent },
+      { path: ':id', component: BookDetailComponent }
+    ] }
 ];
 
 @NgModule({

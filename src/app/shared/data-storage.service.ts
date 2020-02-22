@@ -14,7 +14,7 @@ export interface BooksResponse {
 
 @Injectable({providedIn: 'root'})
 export class DataStorageService {
-  constructor(private http: HttpClient, private bookService: BookService, private authService: AuthService) {}
+  constructor(private http: HttpClient, private bookService: BookService) {}
 
   fetchBooks(q: string) {
     return this.http.get<BooksResponse>(`https://www.googleapis.com/books/v1/volumes?q=${q}`)
