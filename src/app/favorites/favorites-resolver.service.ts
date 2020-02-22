@@ -1,9 +1,9 @@
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Injectable } from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {Injectable} from '@angular/core';
 
-import { TransformedBook } from '../book/book.model';
-import { DataStorageService } from '../shared/data-storage.service';
-import { BookService } from '../book/book.service';
+import {TransformedBook} from '../book/book.model';
+import {DataStorageService} from '../shared/data-storage.service';
+import {BookService} from '../book/book.service';
 
 @Injectable({providedIn: 'root'})
 export class FavoritesResolverService implements Resolve<TransformedBook[]> {

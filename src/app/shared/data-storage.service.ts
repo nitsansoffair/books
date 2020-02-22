@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { map, take, tap } from 'rxjs/operators';
+import {map, take, tap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 import { BookService } from '../book/book.service';

@@ -7,7 +7,7 @@ import { AuthComponent } from './auth/auth.component';
 import { BookStartComponent } from './book/book-start/book-start.component';
 import { AuthGuard } from './auth/auth.guard';
 import { FavoritesComponent } from './favorites/favorites.component';
-import { FavoritesResolverService } from './favorites/favorites-resolver.service';
+import {FavoritesResolverService} from './favorites/favorites-resolver.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/books', pathMatch: 'full' },

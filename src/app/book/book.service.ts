@@ -1,6 +1,5 @@
-import { Subject } from 'rxjs';
-
 import { TransformedBook } from './book.model';
+import {Subject} from 'rxjs';
 
 export class BookService {
   private books: TransformedBook[] = [];
