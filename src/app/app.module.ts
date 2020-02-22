@@ -16,6 +16,7 @@ import { BookStartComponent } from './book/book-start/book-start.component';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     AuthComponent,
     BookStartComponent,
     FavoritesComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
