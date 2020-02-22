@@ -13,14 +13,14 @@ export class FavoritesComponent implements OnInit {
   books: TransformedBook[] = [];
   subscription: Subscription;
 
-  constructor(private bookService: BookService) { }
+  constructor(public bookService: BookService) { }
 
   ngOnInit(): void {
     this.subscription = this.bookService.favoritesChanged.subscribe((books: TransformedBook[]) => {
       this.books = books;
     });
 
-    this.books = this.bookService.getFavorites();
+    this.books = this.bookService.getFavoritesForPage();
   }
 
 }

@@ -21,6 +21,6 @@ export class BookItemComponent implements OnInit {
   }
 
   removeFromFavorites() {
-    this.bookService.removeFromFavorite(this.index);
+    this.bookService.removeFromFavorite(this.book);
   }
 }

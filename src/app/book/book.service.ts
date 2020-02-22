@@ -7,6 +7,7 @@ export class BookService {
   favorites: TransformedBook[] = [];
   favoritesChanged = new Subject<TransformedBook[]>();
   pageIndex = 1;
+  favoritesPageIndex = 1;
 
   getBooksForPage() {
     return this.books.slice((this.pageIndex - 1) * 8, (this.pageIndex - 1) * 8 + 8);
@@ -19,33 +20,6 @@ export class BookService {
   setBooks(books: TransformedBook[]) {
     this.books = books;
     this.booksChanged.next(this.getBooksForPage());
-  }
-
-  setFavorites(books: TransformedBook[]) {
-    this.favorites = books;
-    this.favoritesChanged.next(this.favorites.slice());
-  }
-
-  getFavorite(index: number) {
-    return this.favorites[index];
-  }
-
-  getFavorites() {
-    return this.favorites;
-  }
-
-  addToFavorite(index: number) {
-    this.favorites.push(this.getBook(index));
-    this.favoritesChanged.next(this.favorites.slice());
-  }
-
-  removeFromFavorite(index: number) {
-    this.favorites.splice(this.favorites.indexOf(this.getBook(index)), 1);
-    this.favoritesChanged.next(this.favorites.slice());
-  }
-
-  isInFavorites(book: TransformedBook) {
-    return this.favorites.indexOf(book) !== -1;
   }
 
   onPreviousPage() {
@@ -64,6 +38,55 @@ export class BookService {
 
   hasPreviousPage() {
     return this.pageIndex > 1;
+  }
+
+  setFavorites(books: TransformedBook[]) {
+    this.favorites = books;
+    this.favoritesChanged.next(this.getFavoritesForPage());
+  }
+
+  getFavorite(index: number) {
+    return this.favorites[(this.favoritesPageIndex - 1) * 8 + index];
+  }
+
+  getFavorites() {
+    return this.favorites.slice();
+  }
+
+  getFavoritesForPage() {
+    return this.favorites.slice((this.favoritesPageIndex - 1) * 8, (this.favoritesPageIndex - 1) * 8 + 8);
+  }
+
+  addToFavorite(index: number) {
+    this.favorites.push(this.getBook(index));
+    this.favoritesChanged.next(this.getFavoritesForPage());
+  }
+
+  removeFromFavorite(book: TransformedBook) {
+    this.favorites.splice(this.favorites.indexOf(book), 1);
+    this.favoritesChanged.next(this.getFavoritesForPage());
+  }
+
+  isInFavorites(book: TransformedBook) {
+    return this.favorites.indexOf(book) !== -1;
+  }
+
+  onFavoritesPreviousPage() {
+    this.favoritesPageIndex--;
+    this.favoritesChanged.next(this.getFavoritesForPage());
+  }
+
+  onFavoritesNextPage() {
+    this.favoritesPageIndex++;
+    this.favoritesChanged.next(this.getFavoritesForPage());
+  }
+
+  hasFavoritesNextPage() {
+    return this.favoritesPageIndex * 8 < this.favorites.length;
+  }
+
+  hasFavoritesPreviousPage() {
+    return this.favoritesPageIndex > 1;
   }
 
 }

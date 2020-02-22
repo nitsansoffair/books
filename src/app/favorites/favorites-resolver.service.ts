@@ -10,7 +10,7 @@ export class FavoritesResolverService implements Resolve<TransformedBook[]> {
   constructor(private dataStorageService: DataStorageService, private bookService: BookService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const favorites = this.bookService.getFavorites();
+    const favorites = this.bookService.getFavoritesForPage();
 
     if (favorites.length === 0) {
       return this.dataStorageService.fetchFavorites();

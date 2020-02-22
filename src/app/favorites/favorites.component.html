@@ -5,14 +5,26 @@
         <h1>Favorites</h1>
       </div>
     </div>
+    <div class="row" *ngIf="books.length">
+      <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <h3>Page Number {{ bookService.favoritesPageIndex }}</h3>
+      </div>
+    </div>
     <div class="row">
-      <div class="col-xs-12" *ngIf="books.length">
+      <div class="col-xs-12">
         <app-book-item
           *ngFor="let book of books; let i = index"
           [book]="book"
           [index]="i"
         >
         </app-book-item>
+      </div>
+    </div>
+    <div *ngIf="books.length" class="row">
+      <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <a *ngIf="bookService.hasFavoritesPreviousPage()" (click)="bookService.onFavoritesPreviousPage()" style="cursor: pointer;">Previous Page</a>
+        <span *ngIf="bookService.hasFavoritesPreviousPage() && bookService.hasFavoritesNextPage()"> | </span>
+        <a *ngIf="bookService.hasFavoritesNextPage()" (click)="bookService.onFavoritesNextPage()" style="cursor: pointer;">Next Page</a>
       </div>
     </div>
   </div>
