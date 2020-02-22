@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { Router } from '@angular/router';
 
 import { AuthResponseData, AuthService } from './auth.service';
@@ -10,14 +10,25 @@ import { AuthResponseData, AuthService } from './auth.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   isLoginMode = true;
   isLoading = false;
   error: string = null;
+  isLogin = false;
+  userSub: Subscription;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.userSub = this.authService.user.subscribe((user) => {
+      if (!!user) {
+        this.isLogin = true;
+      }
+    });
+
+    if (this.isLogin) {
+      this.router.navigate(['/books']);
+    }
   }
 
   onSubmit(form: NgForm) {
@@ -51,5 +62,9 @@ export class AuthComponent implements OnInit {
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
+  }
+
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
   }
 }
