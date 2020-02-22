@@ -1,19 +1,25 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 
 import { BookService } from '../book/book.service';
 import { AuthService } from '../auth/auth.service';
 import { Book, TransformedBook } from '../book/book.model';
 
+export interface BooksResponse {
+  kind: string;
+  totalItems: number;
+  items: Book[];
+}
+
+@Injectable({providedIn: 'root'})
 export class DataStorageService {
   constructor(private http: HttpClient, private bookService: BookService, private authService: AuthService) {}
 
   fetchBooks(q: string) {
-    return this.http.get<Book[]>('https://www.googleapis.com/books/v1/volumes', {
-      params: new HttpParams().append('q', q)
-    })
-      .pipe(map((books) => {
-        return books.map((book): TransformedBook => {
+    return this.http.get<BooksResponse>(`https://www.googleapis.com/books/v1/volumes?q=${q}`)
+      .pipe(map((booksResponse) => {
+        return booksResponse.items.map((book): TransformedBook => {
           return {
             id: book.id,
             title: book.volumeInfo.title,

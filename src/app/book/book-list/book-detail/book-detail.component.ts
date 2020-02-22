@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Book } from '../../book.model';
+import { TransformedBook } from '../../book.model';
 import { BookService } from '../../book.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { BookService } from '../../book.service';
   styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent implements OnInit {
-  book: Book;
+  book: TransformedBook;
   id: number;
 
   constructor(private route: ActivatedRoute, private bookService: BookService) { }
