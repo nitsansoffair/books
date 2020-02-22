@@ -38,9 +38,7 @@ export class DataStorageService {
   storeFavorites() {
     this.http
       .put('https://complot-books.firebaseio.com/favorites.json', this.bookService.getFavorites())
-      .subscribe((res) => {
-        console.log('Store Favorites - ' + res);
-      });
+      .subscribe();
   }
 
   fetchFavorites() {

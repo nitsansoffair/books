@@ -18,8 +18,6 @@ export class FavoritesComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.bookService.favoritesChanged.subscribe((books: TransformedBook[]) => {
       this.books = books;
-
-      console.log('bookService Subscription favorites - ' + this.books);
     });
 
     this.books = this.bookService.getFavorites();

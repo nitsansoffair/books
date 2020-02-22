@@ -21,8 +21,6 @@ export class BookListComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.bookService.booksChanged.subscribe((books: TransformedBook[]) => {
       this.books = books;
-
-      console.log('bookService Subscription - ' + this.books);
       this.initForm();
     });
 
@@ -32,9 +30,7 @@ export class BookListComponent implements OnInit {
 
   onSubmit() {
     this.dataStorageService.fetchBooks(this.searchForm.value.search)
-      .subscribe((books) => {
-        console.log('onSubmit - ' + books);
-      });
+      .subscribe();
   }
 
   initForm() {
