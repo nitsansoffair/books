@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import {map, take, tap} from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 import { BookService } from '../book/book.service';
-import { AuthService } from '../auth/auth.service';
 import { Book, TransformedBook } from '../book/book.model';
 
 export interface BooksResponse {
@@ -35,15 +34,15 @@ export class DataStorageService {
       }));
   }
 
-  storeFavorites() {
+  storeFavorites(userId: string) {
     this.http
-      .put('https://complot-books.firebaseio.com/favorites.json', this.bookService.getFavorites())
+      .put(`https://complot-books.firebaseio.com/${userId}/favorites.json`, this.bookService.getFavorites())
       .subscribe();
   }
 
-  fetchFavorites() {
+  fetchFavorites(userId: string) {
     this.http
-      .get<TransformedBook[]>('https://complot-books.firebaseio.com/favorites.json')
+      .get<TransformedBook[]>(`https://complot-books.firebaseio.com/${userId}/favorites.json`)
       .subscribe((books) => {
         this.bookService.setFavorites(books);
       });

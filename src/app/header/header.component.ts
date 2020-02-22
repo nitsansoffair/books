@@ -12,12 +12,14 @@ import {DataStorageService} from '../shared/data-storage.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private userSub: Subscription;
+  userId: string;
 
   constructor(private authService: AuthService, private dataStorageService: DataStorageService) { }
 
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe((user) => {
       this.isAuthenticated = !!user;
+      this.userId = user.id;
     });
   }
 
@@ -26,11 +28,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveFavorites() {
-    this.dataStorageService.storeFavorites();
+    this.dataStorageService.storeFavorites(this.userId);
   }
 
   onFetchFavorites() {
-    this.dataStorageService.fetchFavorites();
+    this.dataStorageService.fetchFavorites(this.userId);
   }
 
   ngOnDestroy(): void {
