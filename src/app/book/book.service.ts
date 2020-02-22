@@ -20,6 +20,11 @@ export class BookService {
     this.booksChanged.next(this.books.slice());
   }
 
+  setFavorites(books: TransformedBook[]) {
+    this.favorites = books;
+    this.favoritesChanged.next(this.favorites.slice());
+  }
+
   getFavorites() {
     return this.favorites;
   }

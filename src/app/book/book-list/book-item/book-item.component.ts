@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { TransformedBook } from '../../book.model';
-import {BookService} from '../../book.service';
+import { BookService } from '../../book.service';
 
 @Component({
   selector: 'app-book-item',

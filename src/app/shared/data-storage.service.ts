@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import {map, take, tap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 import { BookService } from '../book/book.service';
@@ -33,5 +33,21 @@ export class DataStorageService {
       }), tap((books: TransformedBook[]) => {
         this.bookService.setBooks(books);
       }));
+  }
+
+  storeFavorites() {
+    this.http
+      .put('https://complot-books.firebaseio.com/favorites.json', this.bookService.getFavorites())
+      .subscribe((res) => {
+        console.log('Store Favorites - ' + res);
+      });
+  }
+
+  fetchFavorites() {
+    this.http
+      .get<TransformedBook[]>('https://complot-books.firebaseio.com/favorites.json')
+      .subscribe((books) => {
+        this.bookService.setFavorites(books);
+      });
   }
 }
