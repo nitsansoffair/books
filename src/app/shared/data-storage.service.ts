@@ -18,7 +18,7 @@ export class DataStorageService {
   constructor(private http: HttpClient, private bookService: BookService) {}
 
   fetchBooks(q: string) {
-    return this.http.get<BooksResponse>(`https://www.googleapis.com/books/v1/volumes?q=${q}`)
+    return this.http.get<BooksResponse>(`https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=40`)
       .pipe(map((booksResponse) => {
         return booksResponse.items.map((book): TransformedBook => {
           return {
