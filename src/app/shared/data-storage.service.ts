@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import {map, take, tap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 import { BookService } from '../book/book.service';
@@ -13,6 +13,8 @@ export interface BooksResponse {
 
 @Injectable({providedIn: 'root'})
 export class DataStorageService {
+  userId: string;
+
   constructor(private http: HttpClient, private bookService: BookService) {}
 
   fetchBooks(q: string) {
@@ -34,17 +36,24 @@ export class DataStorageService {
       }));
   }
 
-  storeFavorites(userId: string) {
+  storeFavorites() {
     this.http
-      .put(`https://complot-books.firebaseio.com/${userId}/favorites.json`, this.bookService.getFavorites())
+      .put(`https://complot-books.firebaseio.com/${this.userId}/favorites.json`, this.bookService.getFavorites())
       .subscribe();
   }
 
-  fetchFavorites(userId: string) {
-    this.http
-      .get<TransformedBook[]>(`https://complot-books.firebaseio.com/${userId}/favorites.json`)
-      .subscribe((books) => {
-        this.bookService.setFavorites(books);
-      });
+  fetchFavorites() {
+    return this.http
+      .get<TransformedBook[]>(`https://complot-books.firebaseio.com/${this.userId}/favorites.json`)
+      .pipe(
+        take(1),
+        tap((books) => {
+          this.bookService.setFavorites(books);
+        })
+      );
+  }
+
+  setUserId(userId: string) {
+    this.userId = userId;
   }
 }
