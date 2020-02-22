@@ -6,7 +6,7 @@
 >
   <div class="pull-left">
     <h4 class="list-group-item-heading">{{ book.title}}</h4>
-    <p class="list-group-item-text">{{ book.autors[0] }}</p>
+    <p class="list-group-item-text">{{ book.autors && book.autors.length ? book.autors[0] : '' }}</p>
     <button class="btn btn-default" type="button" (click)="addToFavorites()" *ngIf="!bookService.isInFavorites(book)">Add To Favorites</button>
     <button class="btn btn-danger" type="button" (click)="removeFromFavorites($event)" *ngIf="bookService.isInFavorites(book)">Remove From Favorites</button>
   </div>

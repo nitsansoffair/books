@@ -15,6 +15,7 @@ export class BookListComponent implements OnInit {
   books: TransformedBook[];
   subscription: Subscription;
   searchForm: FormGroup;
+  q: string;
 
   constructor(public bookService: BookService, private dataStorageService: DataStorageService) { }
 
@@ -29,6 +30,7 @@ export class BookListComponent implements OnInit {
   }
 
   onSubmit() {
+    this.q = this.searchForm.value.search;
     this.dataStorageService.fetchBooks(this.searchForm.value.search)
       .subscribe();
   }
