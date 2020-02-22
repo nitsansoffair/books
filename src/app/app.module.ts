@@ -14,6 +14,8 @@ import { BookService } from './book/book.service';
 import { AuthComponent } from './auth/auth.component';
 import { BookStartComponent } from './book/book-start/book-start.component';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {AuthInterceptorService} from './auth/auth-interceptor.service';
     BookItemComponent,
     BookDetailComponent,
     AuthComponent,
-    BookStartComponent
+    BookStartComponent,
+    FavoritesComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,8 @@ import { BookComponent } from './book/book.component';
 import { BookDetailComponent } from './book/book-list/book-detail/book-detail.component';
 import { AuthComponent } from './auth/auth.component';
 import { BookStartComponent } from './book/book-start/book-start.component';
-import {AuthGuard} from './auth/auth.guard';
+import { AuthGuard } from './auth/auth.guard';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/books', pathMatch: 'full' },
@@ -13,7 +14,8 @@ const appRoutes: Routes = [
       { path: '', component: BookStartComponent },
       { path: ':id', component: BookDetailComponent }
     ] },
-  { path: 'auth', component: AuthComponent }
+  { path: 'auth', component: AuthComponent },
+  { path: 'favorites', component: FavoritesComponent }
 ];
 
 @NgModule({
