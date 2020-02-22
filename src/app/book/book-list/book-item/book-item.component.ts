@@ -20,7 +20,9 @@ export class BookItemComponent implements OnInit {
     this.bookService.addToFavorite(this.index);
   }
 
-  removeFromFavorites() {
+  removeFromFavorites(event: Event) {
+    event.preventDefault();
+
     this.bookService.removeFromFavorite(this.book);
   }
 }
