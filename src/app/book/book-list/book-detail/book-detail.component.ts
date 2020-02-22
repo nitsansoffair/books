@@ -18,7 +18,12 @@ export class BookDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = +params.id;
-      this.book = this.bookService.getBook(this.id);
+
+      if (this.route.snapshot.parent.url[0].path === 'favorites') {
+        this.book = this.bookService.getFavorite(this.id);
+      } else {
+        this.book = this.bookService.getBook(this.id);
+      }
     });
   }
 

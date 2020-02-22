@@ -25,6 +25,10 @@ export class BookService {
     this.favoritesChanged.next(this.favorites.slice());
   }
 
+  getFavorite(index: number) {
+    return this.favorites[index];
+  }
+
   getFavorites() {
     return this.favorites;
   }
