@@ -20,17 +20,19 @@ export class DataStorageService {
   fetchBooks(q: string) {
     return this.http.get<BooksResponse>(`https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=40`)
       .pipe(map((booksResponse) => {
-        return booksResponse.items.map((book): TransformedBook => {
-          return {
-            id: book.id,
-            title: book.volumeInfo.title,
-            autors: book.volumeInfo.authors,
-            description: book.volumeInfo.description,
-            imageLinks: book.volumeInfo.imageLinks.thumbnail,
-            publishedDate: book.volumeInfo.publishedDate,
-            pdf: book.accessInfo.pdf.acsTokenLink
-          };
-        });
+        return booksResponse.items
+          .filter((book) => book)
+          .map((book): TransformedBook => {
+            return {
+              id: book.id,
+              title: book.volumeInfo.title,
+              autors: book.volumeInfo.authors,
+              description: book.volumeInfo.description,
+              imageLinks: book.volumeInfo.imageLinks.thumbnail,
+              publishedDate: book.volumeInfo.publishedDate,
+              pdf: book.accessInfo.pdf.acsTokenLink
+            };
+          });
       }), tap((books: TransformedBook[]) => {
         this.bookService.setBooks(books);
       }));
