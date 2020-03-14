@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 import { User } from './user.model';
 
@@ -70,7 +71,7 @@ export class AuthService {
   }
 
   authenticate(email: string, password: string, urlReq: string) {
-    return this.http.post<AuthResponseData>(urlReq + 'AIzaSyDwKidwpuGhodMGSFs8CiDiNyVcNXloP-M', {
+    return this.http.post<AuthResponseData>(urlReq + environment.firebaseAPIKey, {
       email,
       password,
       returnSecureToken: true
